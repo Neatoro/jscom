@@ -1,0 +1,14 @@
+[package]
+name = "app"
+version = "0.1.0"
+authors = ["moritz.schramm"]
+edition = "2018"
+
+[dependencies]
+pest = "2.1.3"
+pest_derive = "2.1.0"
+llvm-sys = "130"
+
+[profile.dev]
+opt-level = 0               # Use slightly better optimizations.
+overflow-checks = false     # Disable integer overflow checks.

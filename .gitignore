@@ -1,0 +1,9 @@
+/target
+*.bc
+*.ll
+*.obj
+*.exe
+*.o
+.vscode
+*.so
+/build*

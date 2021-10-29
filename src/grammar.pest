@@ -1,0 +1,29 @@
+int_literal = @{ ("+" | "-")? ~ ASCII_DIGIT+ }
+string_literal = { "'" ~ ASCII_ALPHANUMERIC* ~ "'"}
+literal = _{ int_literal | string_literal }
+
+program = _{ SOI ~ instruction* ~ EOI }
+
+instruction = { (assignment | func_call) ~ ";" | func_decl }
+
+assignment = { object_expr ~ "=" ~ expr }
+func_call = { object_expr ~ argument_list }
+
+expr = { unary_expr | binary_expr }
+unary_expr = { ("+" | "-") ~ term }
+binary_expr = { term ~ (operator ~ term)* }
+term = { object_expr | literal | "(" ~ expr ~ ")" }
+operator = { "+" | "-" | "*" | "/" | "%" | "&" | "|" | "^" | "&&" | "==" | "||" | "===" }
+
+func_decl = {"function" ~ id? ~ parameter_list ~ "{" ~ func_body ~ "}" }
+func_body = { instruction* }
+parameter_list = { "(" ~ (id ~ ("," ~ id)*)? ~ ")"}
+
+argument_list = { "(" ~ (argument ~ ("," ~ argument)*)? ~ ")"}
+argument = _{ object_expr | literal }
+
+object_expr = { id ~ ( "." ~ object_expr )* }
+id = @{ ASCII_ALPHA ~ ASCII_ALPHANUMERIC* }
+
+newline = { "\n" | "\r\n" }
+WHITESPACE = _{ " " | "\t" | newline}
