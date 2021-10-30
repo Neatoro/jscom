@@ -2,7 +2,6 @@ extern crate llvm_sys;
 
 use super::nodes;
 use super::nodes::*;
-use llvm_sys::bit_writer::*;
 use llvm_sys::target::*;
 
 mod components;
@@ -33,7 +32,6 @@ pub fn build(node: Node) {
         let mut target_machine = target::TargetMachine::new(c_str!(target_triple)).unwrap();
         target_machine.write_to_object_file(&module);
 
-        LLVMWriteBitcodeToFile(module.get_module(), c_str!("out.bc"));
         module.dispose();
         target_machine.dispose();
     }
