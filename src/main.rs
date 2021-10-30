@@ -12,10 +12,12 @@ pub mod nodes;
 use nodes::Node;
 
 mod llvm;
+mod cli;
 
 fn main() {
-    let code: &str = "function foo(message) { logger(message); } foo('Hello World');";
-    let pairs: pest::iterators::Pairs<Rule> = CodeParser::parse(Rule::program, code).unwrap_or_else(|e| panic!("{}", e));
+    let options: cli::Options = cli::parse_opts();
+    let code = std::fs::read_to_string(options.input).unwrap();
+    let pairs: pest::iterators::Pairs<Rule> = CodeParser::parse(Rule::program, &code).unwrap_or_else(|e| panic!("{}", e));
 
     llvm::build(parse_program(pairs));
 
