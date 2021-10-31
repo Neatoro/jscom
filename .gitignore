@@ -1,4 +1,4 @@
-/target
+target
 *.bc
 *.ll
 *.obj
@@ -6,4 +6,4 @@
 *.o
 .vscode
 *.so
-/build*
+build*
