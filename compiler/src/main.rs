@@ -34,7 +34,7 @@ fn main() {
 pub fn build_clang_path() -> String {
     let exe_dir = std::env::current_exe().unwrap();
     let install_dir = exe_dir.parent().unwrap();
-    install_dir.join("llvm").join("bin").join("clang").to_str().unwrap().to_string()
+    install_dir.join("bin").join("clang").to_str().unwrap().to_string()
 }
 
 pub fn get_lib_path() -> String {
