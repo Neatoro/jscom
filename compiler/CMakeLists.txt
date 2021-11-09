@@ -9,7 +9,13 @@ add_custom_command(
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+set(JSCOM_ARTIFACT "app")
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(JSCOM_ARTIFACT "app.exe")
+endif()
+
 install(
-    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/target/release/app.exe
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/target/release/${JSCOM_ARTIFACT}
     DESTINATION ${CMAKE_INSTALL_PREFIX}
 )
